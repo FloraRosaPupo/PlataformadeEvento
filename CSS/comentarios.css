@@ -1,0 +1,88 @@
+body {
+    padding: 0 20px; 
+}
+
+section {
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.review {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.review p {
+    margin: 0;
+}
+
+
+.review p:first-child {
+    font-weight: bold;
+}
+
+.add-review-form {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+}
+
+.add-review-form label,
+.add-review-form textarea,
+.add-review-form select {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%; 
+}
+
+.add-review-form button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center; 
+}
+
+.add-review-form button:hover {
+    background-color: #0056b3; 
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.review .rating {
+    font-size: 1.5em;
+    color: #f39c12; /* Cor das estrelas */
+}
+
+.review .rating .star {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: url('../images/star.png') no-repeat center center;
+    background-size: contain;
+}
+
+.review .rating .star.empty {
+    background: url('../images/star-empty.png') no-repeat center center;
+    background-size: contain;
+}

@@ -1,0 +1,157 @@
+/* Estilo da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+td {
+    border-right: 1px solid #ddd;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+/* Estilo dos botões */
+button {
+    padding: 10px 15px;
+    background-color: #555;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+section {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+button:hover {
+    background-color: #888888;
+    transform: scale(1.02);
+}
+
+/* Estilizando o botão principal */
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f5f5dc; /* Cor bege */
+    color: #000; /* Cor do texto */
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+a.button:hover {
+    background-color: #e0e0d1;
+}
+
+/* Estilo dos links de ação */
+.actions a {
+    text-decoration: none;
+    color: FFC107; /* Cor azul */
+    padding: 4px 8px;
+    border: 1px solid #FFC107; /* Borda azul */
+    border-radius: 4px;
+    margin: 0 2px;
+}
+
+.actions a:hover {
+    background-color: #FFC107; /* Cor de fundo azul */
+    color: #fff; /* Cor do texto ao passar o mouse */
+}
+
+/* Estilo do link 'Editar' */
+.actions a.edit {
+    background-color: #FFC107; /* Cor amarela */
+    border-color: #FFC107; /* Borda amarela */
+    color: #000; /* Cor do texto */
+}
+
+.actions a.edit:hover {
+    background-color: #FFA000; /* Cor de fundo amarela escura ao passar o mouse */
+    color: #fff; 
+}
+
+/* Estilo do perfil de usuário */
+.user-profile {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 100px;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.user-profile p {
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.user-profile a {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #007BFF;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.user-profile a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+
+.button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
