@@ -1,6 +1,26 @@
 # Plataforma de Eventos
 
-Aplicação acadêmica em PHP e MySQL para usuários, eventos, categorias e inscrições.
+## Descrição
+
+Aplicação web em PHP e MySQL para gerenciar eventos, categorias, usuários e inscrições. Inclui formulários de cadastro e edição de eventos, validação de entrada e persistência em banco de dados.
+
+## Stack e bibliotecas
+
+PHP 8.2, mysqli e MySQL.
+
+## Funcionalidades
+
+- Cadastro e edição de eventos.
+- Categorias.
+- Usuários e inscrições.
+
+## Licença
+
+Não há uma licença de distribuição definida para este repositório. Nenhuma licença MIT, Apache ou equivalente é concedida por este README. As atribuições e os direitos dos materiais de terceiros permanecem preservados.
+
+## Validação e limites
+
+Validação de data/hora/categoria e integração de criação/atualização com MySQL na CI. Outros fluxos de usuários/inscrições ainda exigem teste integrado; não representa auditoria completa de segurança.
 
 ## Configuração local
 Requer PHP 8.2+ com extensão mysqli e MySQL. Importe `Data/Sql.sql` em um banco de desenvolvimento (o script cria o banco `labprog`). Defina `DB_HOST`, `DB_USER`, `DB_PASSWORD` e `DB_NAME` no ambiente do terminal. `.env.example` apenas documenta as variáveis; PHP não carrega esse arquivo automaticamente.
@@ -18,22 +38,6 @@ Abra `http://127.0.0.1:8000/home.php`. O servidor embutido é destinado ao desen
 
 ## Verificação
 A CI executa `php -l` em todos os arquivos PHP. Isso verifica sintaxe; os fluxos de autenticação, autorização e banco ainda exigem testes integrados. Esta aplicação acadêmica não foi auditada para publicação em produção.
-
-## Licença
-Não há licença de distribuição definida neste repositório.
-
-
-## Stack e bibliotecas
-
-PHP 8.2, mysqli e MySQL.
-
-
-## Funcionalidades
-
-- Cadastro e edição de eventos.
-- categorias.
-- usuários e inscrições.
-
 
 ## Organização e manutenção
 
