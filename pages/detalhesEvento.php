@@ -47,21 +47,21 @@ if (isset($_GET['id'])) {
     </header>
     <nav>
         <ul>
-    
+
             <li><a href="../home.php">Início</a></li>
             <?php if ($user instanceof Usuarios && $user->getUserType() === 'admin') : ?>
-                <li><a href="../Pages/adicionarEventos.php">Adicionar Evento</a></li>
+                <li><a href="../pages/adicionarEventos.php">Adicionar Evento</a></li>
             <?php endif; ?>
             <?php if ($user instanceof Usuarios) : ?>
-                <li><a href="../Pages/perfil.php">Perfil</a></li>
+                <li><a href="../pages/perfil.php">Perfil</a></li>
                 <li><a href="../Services/Deslogar.php">Sair</a></li>
             <?php else : ?>
-                <li><a href="../Pages/login.php">Login</a></li>
+                <li><a href="../pages/login.php">Login</a></li>
             <?php endif; ?>
 
         </ul>
     </nav>
-    
+
     <section class="event-details-card">
         <?php if ($event): ?>
             <h2><?php echo htmlspecialchars($event->getTitle(), ENT_QUOTES, 'UTF-8'); ?></h2>

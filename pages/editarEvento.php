@@ -1,10 +1,12 @@
 <?php
 session_start();
+require_once __DIR__ . '/../features/events/presentation/EventAccess.php';
+requireEventManager();
 
 require_once '../Classes/Usuarios.php';
 require_once __DIR__ . '/../Data/conexao.php';
 require_once '../Classes/Eventos.php';
-require_once '../Classes/Categorias.php'; 
+require_once '../Classes/Categorias.php';
 
 if (!isset($_SESSION['user']) || (unserialize($_SESSION['user'])->getUserType() !== 'admin' && unserialize($_SESSION['user'])->getUserType() !== 'pessoal')) {
     header('Location: ../Services/SemAutorizacao.php');
@@ -43,20 +45,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
                 <ul>
                     <li><a href="../home.php">Início</a></li>
                     <?php if ($user instanceof Usuarios && $user->getUserType() === 'admin') : ?>
-                        <li><a href="../Pages/adicionarEventos.php">Adicionar Evento</a></li>
+                        <li><a href="../pages/adicionarEventos.php">Adicionar Evento</a></li>
                     <?php endif; ?>
                     <?php if ($user instanceof Usuarios) : ?>
-                        <li><a href="../Pages/perfil.php">Perfil</a></li>
+                        <li><a href="../pages/perfil.php">Perfil</a></li>
                         <li><a href="../Services/Deslogar.php">Sair</a></li>
                     <?php else : ?>
-                        <li><a href="../Pages/login.php">Login</a></li>
+                        <li><a href="../pages/login.php">Login</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
-        
+
             <section>
                 <h2>Editar Evento</h2>
                 <form action="../Services/AtualizarEvento.php" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['event_csrf'], ENT_QUOTES, 'UTF-8'); ?>">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($eventId, ENT_QUOTES, 'UTF-8'); ?>">
                     <label for="title">Título:</label>
                     <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($event->getTitle(), ENT_QUOTES, 'UTF-8'); ?>" required><br>
@@ -76,12 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
                             </option>
                         <?php endforeach; ?>
                     </select><br>
-                
-                    <button type="button">Atualizar</button>
+
+                    <button type="submit">Atualizar</button>
                 </form>
 
 
-               
+
             </section>
             <script>
                 function confirmDelete() {

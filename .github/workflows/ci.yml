@@ -1,10 +1,25 @@
-name: PHP syntax
+name: PHP checks
 on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 jobs:
   lint:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: test-only-password
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -ptest-only-password"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      DB_HOST: 127.0.0.1
+      DB_USER: root
+      DB_PASSWORD: test-only-password
+      DB_NAME: labprog
+      RUN_DB_TESTS: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -13,3 +28,6 @@ jobs:
           extensions: mysqli
           coverage: none
       - run: find . -name '*.php' -not -path './.git/*' -print0 | xargs -0 -n 1 php -l
+      - run: php tests/event_input_test.php
+      - run: mysql -h 127.0.0.1 -u root -ptest-only-password < Data/Sql.sql
+      - run: php tests/event_repository_test.php

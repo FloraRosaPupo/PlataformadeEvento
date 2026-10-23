@@ -21,3 +21,22 @@ A CI executa `php -l` em todos os arquivos PHP. Isso verifica sintaxe; os fluxos
 
 ## Licença
 Não há licença de distribuição definida neste repositório.
+
+
+## Stack e bibliotecas
+
+PHP 8.2, mysqli e MySQL.
+
+
+## Funcionalidades
+
+- Cadastro e edição de eventos.
+- categorias.
+- usuários e inscrições.
+
+
+## Organização e manutenção
+
+A funcionalidade de escrita de eventos está em `features/events`: validação de entrada no domínio, SQL no repositório e autorização/CSRF na apresentação. URLs existentes continuam como pontos de entrada. O botão de edição e o handler foram corrigidos; leitura legada segue Active Record nas classes existentes.
+
+Veja [a revisão de desenvolvimento](docs/REVISAO.md) para decisões, testes e limites, e [o guia de contribuição](CONTRIBUTING.md) para o fluxo de manutenção.
