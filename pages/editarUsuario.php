@@ -85,13 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <ul>
             <li><a href="../home.php">Início</a></li>
             <?php if ($user instanceof Usuarios && $user->getUserType() === 'admin') : ?>
-                <li><a href="../Pages/adicionarEventos.php">Adicionar Evento</a></li>
+                <li><a href="../pages/adicionarEventos.php">Adicionar Evento</a></li>
             <?php endif; ?>
             <?php if ($user instanceof Usuarios) : ?>
-                <li><a href="../Pages/perfil.php">Perfil</a></li>
+                <li><a href="../pages/perfil.php">Perfil</a></li>
                 <li><a href="../Services/Deslogar.php">Sair</a></li>
             <?php else : ?>
-                <li><a href="../Pages/login.php">Login</a></li>
+                <li><a href="../pages/login.php">Login</a></li>
             <?php endif; ?>
         </ul>
     </nav>
@@ -102,16 +102,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($userToEdit) : ?>
             <form action="./editarUsuario.php?id=<?php echo htmlspecialchars($userToEdit->getId()); ?>" method="post">
                 <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($userToEdit->getId()); ?>">
-                
+
                 <label for="matricula">Matrícula:</label>
                 <input type="text" name="matricula" value="<?php echo htmlspecialchars($userToEdit->getMatricula()); ?>" readonly><br>
-                
+
                 <label for="name">Nome:</label>
                 <input type="text" name="name" value="<?php echo htmlspecialchars($userToEdit->getNome()); ?>" <?php if ($user->getUserType() !== 'admin' && $user->getId() !== $userToEdit->getId()) echo 'disabled'; ?> required><br>
-                
+
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" value="<?php echo htmlspecialchars($userToEdit->getEmail()); ?>" <?php if ($user->getUserType() !== 'admin' && $user->getId() !== $userToEdit->getId()) echo 'disabled'; ?> required><br>
-                
+
                 <?php if ($user->getUserType() === 'admin') : ?>
                     <label for="user_type">Permissão:</label>
                     <select name="user_type" required>
@@ -121,10 +121,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php else : ?>
                     <input type="hidden" name="user_type" value="<?php echo htmlspecialchars($userToEdit->getUserType()); ?>">
                 <?php endif; ?>
-                
+
                 <label for="password">Senha:</label>
                 <input type="password" name="password"><br>
-                
+
                 <button type="submit">Salvar</button>
             </form>
         <?php else : ?>

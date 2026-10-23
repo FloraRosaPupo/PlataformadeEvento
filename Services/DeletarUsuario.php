@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'])) {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            header('Location: ../Pages/paginaAdmin.php'); // Redireciona de volta para a página de administração após a exclusão
+            header('Location: ../pages/paginaAdmin.php'); // Redireciona de volta para a página de administração após a exclusão
             exit();
         } else {
             // Lidar com falhas na exclusão, como usuário não encontrado

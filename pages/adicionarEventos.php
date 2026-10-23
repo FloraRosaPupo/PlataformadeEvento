@@ -4,6 +4,9 @@ require_once __DIR__ . '/../Classes/Usuarios.php';
 require_once __DIR__ . '/../Classes/Categorias.php';
 
 session_start();
+require_once __DIR__ . '/../features/events/data/EventRepository.php';
+require_once __DIR__ . '/../features/events/presentation/EventAccess.php';
+requireEventManager();
 
 if (!isset($_SESSION['user']) || !in_array(unserialize($_SESSION['user'])->getUserType(), ['admin', 'pessoal'])) {
     header('Location: ../Services/SemAutorizacao.php');
@@ -16,40 +19,18 @@ if (isset($_SESSION['user'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $date = $_POST['date'];
-    $time = $_POST['time'];
-    $location = $_POST['location'];
-    $categoryId = $_POST['category'];
-    
-    $conn = getConnection();
-
-    // Verifique se a conexão é válida
-    if (!$conn) {
-        die("Erro de conexão: " . mysqli_connect_error());
+    requireEventCsrf();
+    try {
+        EventInput::fromArray($_POST);
+        $connection = getConnection();
+        try { $eventId = (new EventRepository($connection))->create($_POST); }
+        finally { $connection->close(); }
+        header('Location: detalhesEvento.php?id=' . $eventId, true, 303);
+        exit();
+    } catch (InvalidArgumentException $error) {
+        http_response_code(400);
+        echo htmlspecialchars($error->getMessage(), ENT_QUOTES, 'UTF-8');
     }
-
-    // Ajuste a consulta SQL para refletir o número correto de colunas
-    $stmt = $conn->prepare("INSERT INTO events (title, description, date, time, location, category_id) VALUES (?, ?, ?, ?, ?, ?)");
-
-    // Verifique se a preparação da consulta foi bem-sucedida
-    if (!$stmt) {
-        die("Erro na preparação da consulta: " . $conn->error);
-    }
-
-    // Bind dos parâmetros
-    $stmt->bind_param('sssssi', $title, $description, $date, $time, $location, $categoryId);
-
-    // Execute a consulta
-    if ($stmt->execute()) {
-        $event_id = $stmt->insert_id;
-        echo "Evento cadastrado com sucesso. ID do Evento: " . $event_id;
-    } else {
-        echo "Erro ao cadastrar evento: " . $stmt->error;
-    }
-    $stmt->close();
-    $conn->close();
 }
 ?>
 
@@ -57,25 +38,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>Cadastrar Evento</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/style.css"> 
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     <link rel="stylesheet" type="text/css" href="../CSS/adicionarEventos.css">
 </head>
 <body>
     <header>
         <h1>Eventos UFV</h1>
     </header>
-    
+
     <nav>
         <ul>
             <li><a href="../home.php">Início</a></li>
             <?php if ($user instanceof Usuarios && $user->getUserType() === 'admin') : ?>
-                <li><a href="../Pages/adicionarEventos.php">Adicionar Evento</a></li>
+                <li><a href="../pages/adicionarEventos.php">Adicionar Evento</a></li>
             <?php endif; ?>
             <?php if ($user instanceof Usuarios) : ?>
-                <li><a href="../Pages/perfil.php">Perfil</a></li>
+                <li><a href="../pages/perfil.php">Perfil</a></li>
                 <li><a href="../Services/Deslogar.php">Sair</a></li>
             <?php else : ?>
-                <li><a href="../Pages/login.php">Login</a></li>
+                <li><a href="../pages/login.php">Login</a></li>
             <?php endif; ?>
         </ul>
     </nav>
@@ -83,8 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <br>
     <section>
         <h2>Cadastrar Evento</h2>
-       
+
         <form action="./adicionarEventos.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['event_csrf'], ENT_QUOTES, 'UTF-8'); ?>">
             <div>
                 <label for="title">Nome:</label>
                 <input type="text" name="title" id="title" required>
@@ -109,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="category">Categoria:</label>
 
                 <?php
-                $categories = Categoria::getAll(); 
+                $categories = Categoria::getAll();
 
                 if (!empty($categories)) {
                     echo "<select name='category' id='category' required>";
@@ -125,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 ?>
             </div>
-            
+
             <div>
                 <input type="submit" value="Adicionar Evento">
             </div>

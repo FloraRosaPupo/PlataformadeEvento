@@ -1,16 +1,11 @@
 <?php
 function getConnection() {
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $database = 'labprog';
-
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Erro de conexão: " . $conn->connect_error);
-    }
-
-    return $conn;
+    $host = getenv('DB_HOST') ?: 'localhost';
+    $user = getenv('DB_USER') ?: 'root';
+    $password = getenv('DB_PASSWORD') ?: '';
+    $database = getenv('DB_NAME') ?: 'labprog';
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $connection = new mysqli($host, $user, $password, $database);
+    $connection->set_charset('utf8mb4');
+    return $connection;
 }
-?>

@@ -22,19 +22,19 @@ if (isset($_SESSION['user'])) {
     <header>
         <h1>Eventos UFV</h1>
     </header>
-    
+
     <nav>
         <ul>
             <li><a href="../home.php">Início</a></li>
             <?php if ($user instanceof Usuarios && $user->getUserType() === 'admin') : ?>
-                <li><a href="../Pages/adicionarEventos.php">Adicionar Evento</a></li>
+                <li><a href="../pages/adicionarEventos.php">Adicionar Evento</a></li>
             <?php endif; ?>
             <?php if ($user instanceof Usuarios) : ?>
-                <li><a href="../Pages/paginaDeInscricaoDeEventos.php">Inscrever Evento</a></li>
-                <li><a href="../Pages/perfil.php">Perfil</a></li>
+                <li><a href="../pages/paginaDeInscricaoDeEventos.php">Inscrever Evento</a></li>
+                <li><a href="../pages/perfil.php">Perfil</a></li>
                 <li><a href="../Services/Deslogar.php">Sair</a></li>
             <?php else : ?>
-                <li><a href="../Pages/login.php">Login</a></li>
+                <li><a href="../pages/login.php">Login</a></li>
             <?php endif; ?>
         </ul>
     </nav>
@@ -50,7 +50,7 @@ if (isset($_SESSION['user'])) {
                 <div>
                     <label for="category">Categoria</label>
                     <?php
-                    $categories = Categoria::getAll(); 
+                    $categories = Categoria::getAll();
 
                     if (!empty($categories)) {
                         echo "<select name='category' id='category'>";

@@ -49,17 +49,17 @@ if (isset($_GET['search'])) {
 
         /* Header */
         header {
-            background-color: #f5f5dc; 
-            color: #333; 
+            background-color: #f5f5dc;
+            color: #333;
             padding: 10px 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .header-content {
             display: flex;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             align-items: center;
-            gap: 20px; 
+            gap: 20px;
         }
 
         .header-content h1 {
@@ -69,15 +69,15 @@ if (isset($_GET['search'])) {
 
         /* Navegação */
         nav {
-            background-color: #e0dcd0; 
-            padding: 10px 20px; 
+            background-color: #e0dcd0;
+            padding: 10px 20px;
         }
 
         nav ul {
-            list-style: none; 
-            padding: 0; 
-            display: flex; 
-            gap: 20px; 
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
             margin: 0;
         }
 
@@ -86,24 +86,24 @@ if (isset($_GET['search'])) {
         }
 
         nav ul li a {
-            color: #333; 
-            font-size: 16px; 
-            font-weight: 500; 
-            text-transform: uppercase; 
-            padding: 10px 15px; 
-            border-radius: 25px; 
-            transition: background-color 0.3s, color 0.3s; 
-            display: inline-block; 
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            padding: 10px 15px;
+            border-radius: 25px;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
         }
 
         nav ul li a:hover {
-            background-color: #d0cfc0; 
+            background-color: #d0cfc0;
             color: #333;
         }
 
         nav ul li a.active {
-            background-color: #c0b8a4; 
-            color: #333; 
+            background-color: #c0b8a4;
+            color: #333;
         }
 
         /* Estilo geral para os botões */
@@ -200,18 +200,18 @@ if (isset($_GET['search'])) {
             <h1>Eventos UFV</h1>
         </div>
     </header>
-    
+
     <nav>
         <ul>
             <li><a href="../home.php">Início</a></li>
             <?php if ($user instanceof Usuarios && $user->getUserType() === 'admin') : ?>
-                <li><a href="../Pages/adicionarEventos.php">Adicionar Evento</a></li>
+                <li><a href="../pages/adicionarEventos.php">Adicionar Evento</a></li>
             <?php endif; ?>
             <?php if ($user instanceof Usuarios) : ?>
-                <li><a href="../Pages/perfil.php">Perfil</a></li>
+                <li><a href="../pages/perfil.php">Perfil</a></li>
                 <li><a href="../Services/Deslogar.php">Sair</a></li>
             <?php else : ?>
-                <li><a href="../Pages/login.php">Login</a></li>
+                <li><a href="../pages/login.php">Login</a></li>
             <?php endif; ?>
         </ul>
     </nav>

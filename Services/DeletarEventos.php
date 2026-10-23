@@ -7,10 +7,10 @@ if (isset($_POST['event_id'])) {
 
     Registrar::deleteById($eventId);
 
-    header('Location: ../Pages/perfil.php');
+    header('Location: ../pages/perfil.php');
     exit();
 } else {
-    header('Location: ../Pages/perfil.php');
+    header('Location: ../pages/perfil.php');
     exit();
 }
 ?>
